@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta author="Delire Stéphane">
+	<meta http-equiv="refresh" content="1">
+	<title>Graphe Orienté - Projet Math 2022</title>
+</head>
+
+<style>
+	#container {
+		text-align: center;
+	}
+	canvas {
+		border: 1px solid rgba(0, 0, 0, 0.2);
+		box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	}
+</style>
+
+<body>
+
+<div id="container">
+	<canvas id="canvas" width="600" height="600"></canvas>
+</div>
+
+</body>
+
+
+<script name="load data" src="data.js">
+//Chargement du fichier data.js, dans la var data
+</script>
+
+
+<script name="Creation du canvas de base">
+
+var ctx = document.getElementById('canvas').getContext('2d');
+ctx.font = '10px Arial';
+ctx.fillText("Bruxelles", 300-25, 47-23);
+ctx.fillText("Schaerbeek", 541-25, 221-25);
+ctx.fillText("Evere", 448-10, 505+30);
+ctx.fillText("Woluwe", 151-25, 505+30);
+ctx.fillText("Etterbeek", 59-25, 221-25);
+	
+</script>
+
+<script name="Creation des arcs">
+	/*
+On crée une function qui prend un index en entrée.
+Cet index correspond à quel matrice correspond les arcs.
+	*/
+
+//Points de départ
+depA = [300-10,47]
+depB = [541-3,221-8]
+depC = [448+6,505-5]
+depD = [151+8,505+8]
+depE = [59-5,221+5]
+
+//Points d'arrivé
+finA = [300+10,47]
+finB = [541+3,221+8]
+finC = [448-6,505+8]
+finD = [151-8,505-5]
+finE = [59+2,221-10]
+
+function createArc(i){
+	intraDay = data[i]
+
+	//Bxl : 
+	intraDayBxl1 = Math.round(100 * intraDay[0][0])/100; //Autocontamination
+	intraDayBxl2 = Math.round(100 * intraDay[1][0])/100; //Vers Schaerbeek
+	intraDayBxl3 = Math.round(100 * intraDay[2][0])/100; //Vers Evere
+	intraDayBxl4 = Math.round(100 * intraDay[3][0])/100; //Vers Woluwe
+	intraDayBxl5 = Math.round(100 * intraDay[4][0])/100; //Vers Etterbeek
+
+	//Sch : 
+	intraDaySch1 = Math.round(100 * intraDay[0][1])/100; //Vers Bruxelles
+	intraDaySch2 = Math.round(100 * intraDay[1][1])/100; //Autocontamination
+	intraDaySch3 = Math.round(100 * intraDay[2][1])/100; //Vers Evere
+	intraDaySch4 = Math.round(100 * intraDay[3][1])/100; //Vers Woluwe
+	intraDaySch5 = Math.round(100 * intraDay[4][1])/100; //Vers Etterbeek
+
+	//Eve : 
+	intraDayEve1 = Math.round(100 * intraDay[0][2])/100; //Vers Bruxelles
+	intraDayEve2 = Math.round(100 * intraDay[1][2])/100; //Vers Schaerbeek
+	intraDayEve3 = Math.round(100 * intraDay[2][2])/100; //Autocontamination
+	intraDayEve4 = Math.round(100 * intraDay[3][2])/100; //Vers Woluwe
+	intraDayEve5 = Math.round(100 * intraDay[4][2])/100; //Vers Etterbeek
+
+	//Wsl : 
+	intraDayWsl1 = Math.round(100 * intraDay[0][2])/100; //Vers Bruxelles
+	intraDayWsl2 = Math.round(100 * intraDay[1][2])/100; //Vers Schaerbeek
+	intraDayWsl3 = Math.round(100 * intraDay[2][2])/100; //Vers Evere
+	intraDayWsl4 = Math.round(100 * intraDay[3][2])/100; //Autocontamination
+	intraDayWsl5 = Math.round(100 * intraDay[4][2])/100; //Vers Etterbeek
+
+	//Ett : 
+	intraDayEtt1 = Math.round(100 * intraDay[0][2])/100; //Vers Bruxelles
+	intraDayEtt2 = Math.round(100 * intraDay[1][2])/100; //Vers Schaerbeek
+	intraDayEtt3 = Math.round(100 * intraDay[2][2])/100; //Vers Evere
+	intraDayEtt4 = Math.round(100 * intraDay[3][2])/100; //Vers Woluwe
+	intraDayEtt5 = Math.round(100 * intraDay[4][2])/100; //Autocontamination
+
+
+	//Création des 25 arcs xD
+	//de Bxl vers Sch
+	ctx.beginPath();
+	ctx.moveTo(depA[0], depA[1]);
+	ctx.lineTo(finB[0], finB[1]);
+	ctx.stroke();
+	ctx.fillText(intraDayBxl2, (depA[0]+finB[0])/2, (depA[1]+finB[1])/2)
+
+	//de Bxl vers Eve
+	ctx.beginPath();
+	ctx.moveTo(depA[0], depA[1]);
+	ctx.lineTo(finC[0], finC[1]);
+	ctx.stroke();
+	ctx.fillText(intraDayBxl3, (depA[0]+finC[0])/2, (depA[1]+finC[1])/2)
+
+	//de Bxl vers Wsl
+	ctx.beginPath();
+	ctx.moveTo(depA[0], depA[1]);
+	ctx.lineTo(finD[0], finD[1]);
+	ctx.stroke();
+	ctx.fillText(intraDayBxl4, (depA[0]+finD[0])/2, (depA[1]+finD[1])/2)
+
+	//de Bxl vers Ett
+	ctx.beginPath();
+	ctx.moveTo(depA[0], depA[1]);
+	ctx.lineTo(finE[0], finE[1]);
+	ctx.stroke();
+	ctx.fillText(intraDayBxl5, (depA[0]+finE[0])/2, (depA[1]+finE[1])/2)
+
+	//de Sch vers Bxl
+	ctx.beginPath();
+	ctx.moveTo(depB[0], depB[1]);
+	ctx.lineTo(finA[0], finA[1]);
+	ctx.stroke();
+	ctx.fillText(intraDaySch1, (depB[0]+finA[0])/2, (depB[1]+finA[1])/2)
+
+	//de Sch vers Eve
+	ctx.beginPath();
+	ctx.moveTo(depB[0], depB[1]);
+	ctx.lineTo(finC[0], finC[1]);
+	ctx.stroke();
+	ctx.fillText(intraDaySch3, (depB[0]+finC[0])/2, (depB[1]+finC[1])/2)
+
+	//de Sch vers Wsl
+	ctx.beginPath();
+	ctx.moveTo(depB[0], depB[1]);
+	ctx.lineTo(finD[0], finD[1]);
+	ctx.stroke();
+	ctx.fillText(intraDaySch4, (depB[0]+finD[0])/2, (depB[1]+finD[1])/2)
+
+	//de Sch vers Ett
+	ctx.beginPath();
+	ctx.moveTo(depB[0], depB[1]);
+	ctx.lineTo(finE[0], finE[1]);
+	ctx.stroke();
+	ctx.fillText(intraDaySch5, (depB[0]+finE[0])/2, (depB[1]+finE[1])/2)
+
+	//de Eve vers Bxl
+	ctx.beginPath();
+	ctx.moveTo(depC[0], depC[1]);
+	ctx.lineTo(finA[0], finA[1]);
+	ctx.stroke();
+	ctx.fillText(intraDayEve1, (depC[0]+finA[0])/2, (depC[1]+finA[1])/2)
+
+	//de Eve vers Sch
+	ctx.beginPath();
+	ctx.moveTo(depC[0], depC[1]);
+	ctx.lineTo(finB[0], finB[1]);
+	ctx.stroke();
+	ctx.fillText(intraDayEve2, (depC[0]+finB[0])/2, (depC[1]+finB[1])/2)
+
+	//de Eve vers Wls
+	ctx.beginPath();
+	ctx.moveTo(depC[0], depC[1]);
+	ctx.lineTo(finD[0], finD[1]);
+	ctx.stroke();
+	ctx.fillText(intraDayEve4, (depC[0]+finD[0])/2, (depC[1]+finD[1])/2)
+
+	//de Eve vers Ett
+	ctx.beginPath();
+	ctx.moveTo(depC[0], depC[1]);
+	ctx.lineTo(finE[0], finE[1]);
+	ctx.stroke();
+	ctx.fillText(intraDayEve5, (depC[0]+finE[0])/2, (depC[1]+finE[1])/2)
+
+	//de Wsl vers Bxl
+	ctx.beginPath();
+	ctx.moveTo(depD[0], depD[1]);
+	ctx.lineTo(finA[0], finA[1]);
+	ctx.stroke();
+	ctx.fillText(intraDayWsl1, (depD[0]+finA[0])/2, (depD[1]+finA[1])/2)
+
+	//de Wsl vers Sch
+	ctx.beginPath();
+	ctx.moveTo(depD[0], depD[1]);
+	ctx.lineTo(finB[0], finB[1]);
+	ctx.stroke();
+	ctx.fillText(intraDayWsl2, (depD[0]+finB[0])/2, (depD[1]+finB[1])/2)
+
+	//de Wsl vers Eve
+	ctx.beginPath();
+	ctx.moveTo(depD[0], depD[1]);
+	ctx.lineTo(finC[0], finC[1]);
+	ctx.stroke();
+	ctx.fillText(intraDayWsl3, (depD[0]+finC[0])/2, (depD[1]+finC[1])/2)
+
+	//de Wsl vers Ett
+	ctx.beginPath();
+	ctx.moveTo(depD[0], depD[1]);
+	ctx.lineTo(finE[0], finE[1]);
+	ctx.stroke();
+	ctx.fillText(intraDayWsl5, (depD[0]+finE[0])/2, (depD[1]+finE[1])/2)
+
+	//de Ett vers Bxl
+	ctx.beginPath();
+	ctx.moveTo(depE[0], depE[1]);
+	ctx.lineTo(finA[0], finA[1]);
+	ctx.stroke();
+	ctx.fillText(intraDayEtt1, (depE[0]+finA[0])/2, (depE[1]+finA[1])/2)
+
+	//de Ett vers Sch
+	ctx.beginPath();
+	ctx.moveTo(depE[0], depE[1]);
+	ctx.lineTo(finB[0], finB[1]);
+	ctx.stroke();
+	ctx.fillText(intraDayEtt2, (depE[0]+finB[0])/2, (depE[1]+finB[1])/2)
+
+	//de Ett vers Eve
+	ctx.beginPath();
+	ctx.moveTo(depE[0], depE[1]);
+	ctx.lineTo(finC[0], finC[1]);
+	ctx.stroke();
+	ctx.fillText(intraDayEtt3, (depE[0]+finC[0])/2, (depE[1]+finC[1])/2)
+
+	//de Ett vers Wls
+	ctx.beginPath();
+	ctx.moveTo(depE[0], depE[1]);
+	ctx.lineTo(finD[0], finD[1]);
+	ctx.stroke();
+	ctx.fillText(intraDayEtt4, (depE[0]+finD[0])/2, (depE[1]+finD[1])/2)
+
+	//Autocontamination
+	//Autocontamination Bxl
+	ctx.beginPath();
+	ctx.arc(300,47,20,3.5,6);
+	ctx.stroke();
+	ctx.fillText(intraDayBxl1, 300, 47);
+
+	//Autocontamination Sch
+	ctx.beginPath();
+	ctx.arc(541,221,20,4.5,7);
+	ctx.stroke();
+	ctx.fillText(intraDaySch2, 541, 221);
+
+	//Autocontamination Eve
+	ctx.beginPath();
+	ctx.arc(448,505,20,6,8.5);
+	ctx.stroke();
+	ctx.fillText(intraDayEve3, 448, 505);
+
+	//Autocontamination Wls
+	ctx.beginPath();
+	ctx.arc(151,505,20,7.5,10);
+	ctx.stroke();
+	ctx.fillText(intraDayWsl4, 151, 505);
+
+	//Autocontamination Ett
+	ctx.beginPath();
+	ctx.arc(59,221,20,8.5,11);
+	ctx.stroke();
+	ctx.fillText(intraDayEtt5, 59, 221);
+}
+
+createArc(505)
+</script>
+
+</html>

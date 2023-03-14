@@ -1,0 +1,35 @@
+L'idée ici c'était de créer toute les matrices probabiliste de base ! 
+Suite du cours du 29-04... Dans mes premiers exemples je suis passé par une matrice
+probabiliste de base de 0.2 pour chaque valeurs (divisé le coefficient total par 5, 
+car 5 inconnues) mais c'est justement ce que le prof voulait qu'on trouve au final. 
+
+Une solution était de sortir toutes les valeurs possibles pour cette matrice de 
+probabilité... 
+Une façon de procéder pour créer ces matrices étaient d'imbriquer des boucles les unes 
+dans les autres. (voir le fichier Python)
+Dans un premier temps on crée les lignes formées de 5 inconnues comprises entre 
+0.1 et 0.9, et la somme de ces 5 inconnues doit toujours etre égal à 1. 
+Une fois toute les lignes formées on refait des boucles imbriquée mais cette fois-ci
+on reprend les lignes formées précédement pour former les matrices (tableaux). 
+
+En terme de calcul j'obtient :
+996 Lignes différente, donc
+996^5 matrices différentes -> 980.159.361.278.976 (lol..xD)
+
+Guy et moi avons quand meme essayé de les produire.. 
+J'ai divisé les boucles de création pour pouvoir diviser les fichiers, et cette fois 
+j'ai utilisé le .csv et non pas le .json pour espérer gagner un peu de place de
+stockage et surtout espérer pouvoir le lire via Python...
+
+Une journée de calcul, pour ne sortir qu'un fichier (probablement une erreur dans la 
+deuxieme boucle qui a fait planter le script Python). 
+Dans ce fichier il y a 38793448 matrices (représentées en ligne) et prend une taille de 
+4.195Go ... (lol² xD)
+
+Une petite règle de 3 plus tard : 
+25.266.105,79 x 4.195Go = 105.991.313,78Go
+En gros, rien que le fichier des matrices probabiliste nécessite 106 000 Terra..
+Sachant qu'après il faut encore multiplier chacunes de ces matrices probabiliste 
+par le quotient entre les deux vecteurs journalier (les matrices formées par les 5
+communes) pour avoir le nuages de points finals... 
+lol³
