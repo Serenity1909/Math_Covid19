@@ -7,8 +7,9 @@ https://epistat.wiv-isp.be/covid/
 2022.
 """
 
-# Import (si fonctionne pas, executer le fichier 'requirement.bat' en racine (mode admin ?)
+# Import (si ne fonctionne pas, executer le fichier 'requirement.bat' en racine (mode admin ?)
 import json
+import random
 from colorama import *
 
 init(autoreset=True)
@@ -21,8 +22,9 @@ def makehash():  # Pour les dict a plusieurs niveaux
     return collections.defaultdict(makehash)
 
 
-###########################
-# Début ###################
+# -----------------------------------#
+# Récupération données sur Sciensano #
+# -----------------------------------#
 
 print("=====================================================")
 print(Fore.YELLOW + "1. Conversion données de Sciensano")
@@ -159,4 +161,50 @@ print("Fichier enregistré !")
 tempsFin = datetime.datetime.now()
 tempsTotal = tempsFin - tempsDepart
 print("Effectué en " + Fore.YELLOW + str(tempsTotal) + Fore.RESET + " millisecondes.")
-input()
+
+# ------------------------------#
+# Parser JSON pour les CASES <5 #
+# ------------------------------#
+
+print()
+print("début du parser JSON")
+
+try:
+    file = open("../1. Conversion données de Sciensano/COVID_19BXL.json", "r", encoding='utf8').read()
+except:
+    print(Fore.RED + "Erreur :")
+    print("Impossible de trouver le fichier : " + Fore.CYAN + "COVID19BE_CASES_MUNI.json")
+    input()
+    quit()
+
+print("Fichier : " + Fore.CYAN + "COVID19BE_CASES_MUNI.json" + Fore.RESET + " trouvé.")
+print()
+
+data = json.loads(file)
+
+for x, values in data.items():
+    for y, cases in values.items():
+        if cases == "<5":
+            new_cases = str(random.randint(0, 4))
+            data[x][y] = new_cases
+
+updated_json_data = json.dumps(data)
+
+try:
+    file = open('../1. Conversion données de Sciensano/COVID_19BXL.json', 'w', encoding='utf8')
+    file.write(json.dumps(data))
+    file.close()
+except:
+    print(Fore.RED + "Erreur :")
+    print(Fore.RED + "Impossible d'enregistrer le fichier...")
+    input()
+    quit()
+
+print("Fichier enregistré !")
+
+tempsFin = datetime.datetime.now()
+tempsTotal = tempsFin - tempsDepart
+print("Effectué en " + Fore.YELLOW + str(tempsTotal) + Fore.RESET + " millisecondes.")
+print()
+
+print("Fin Parser JSON")
