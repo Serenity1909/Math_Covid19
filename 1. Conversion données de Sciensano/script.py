@@ -144,7 +144,7 @@ for item in data:
         dicoMatrix[item.get('DATE')]['Woluwe-Saint-Pierre'] = item.get('CASES')
 
 print()
-print("Enregistrement du fichier : " + Fore.CYAN + "'COVID_5BXL.JSON'")
+print("Enregistrement du fichier : " + Fore.CYAN + "'COVID_19BXL.JSON'")
 
 try:
     file = open('COVID_19BXL.json', 'w', encoding='utf8')

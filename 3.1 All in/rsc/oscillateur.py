@@ -36,7 +36,7 @@ def oscillation(matriX, oscillateur, invert=False, multiply=1, divide=1):
     tmp.sort(reverse=True)
 
     # Formation de la list de sortie
-    hsh = [0, 0, 0, 0, 0]
+    hsh = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
     # Calcul dans la boucle
     for i in range(0, len(mtx), 1):
