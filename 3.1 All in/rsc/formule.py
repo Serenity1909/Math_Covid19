@@ -42,8 +42,22 @@ def solve(jour0, jour1, prob):
         r3 = prob[i][2] * jour1[i] / jour0[2] if jour0[2] != 0 else 0
         r4 = prob[i][3] * jour1[i] / jour0[3] if jour0[3] != 0 else 0
         r5 = prob[i][4] * jour1[i] / jour0[4] if jour0[4] != 0 else 0
+        r6 = prob[i][5] * jour1[i] / jour0[5] if jour0[5] != 0 else 0
+        r7 = prob[i][6] * jour1[i] / jour0[6] if jour0[6] != 0 else 0
+        r8 = prob[i][7] * jour1[i] / jour0[7] if jour0[7] != 0 else 0
+        r9 = prob[i][8] * jour1[i] / jour0[8] if jour0[8] != 0 else 0
+        r10 = prob[i][9] * jour1[i] / jour0[9] if jour0[9] != 0 else 0
+        r11 = prob[i][10] * jour1[i] / jour0[10] if jour0[10] != 0 else 0
+        r12 = prob[i][11] * jour1[i] / jour0[11] if jour0[11] != 0 else 0
+        r13 = prob[i][12] * jour1[i] / jour0[12] if jour0[12] != 0 else 0
+        r14 = prob[i][13] * jour1[i] / jour0[13] if jour0[13] != 0 else 0
+        r15 = prob[i][14] * jour1[i] / jour0[14] if jour0[14] != 0 else 0
+        r16 = prob[i][15] * jour1[i] / jour0[15] if jour0[15] != 0 else 0
+        r17 = prob[i][16] * jour1[i] / jour0[16] if jour0[16] != 0 else 0
+        r18 = prob[i][17] * jour1[i] / jour0[17] if jour0[17] != 0 else 0
+        r19 = prob[i][18] * jour1[i] / jour0[18] if jour0[18] != 0 else 0
 
-        tt = [r1, r2, r3, r4, r5]
+        tt = [r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19]
         rtn.append(tt)
 
     return rtn
