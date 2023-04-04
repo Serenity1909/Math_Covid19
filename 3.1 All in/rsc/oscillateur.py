@@ -8,7 +8,7 @@ Delire Stéphane.
 def oscillation(matriX, oscillateur, invert=False, multiply=1, divide=1):
     """
     Fonction d'oscillation,
-    Spécifiez en entrée la matrice 5x1 (une seul ligne donc), et ensuite le tableau
+    Spécifiez en entrée la matrice 19x1 (une seule ligne donc), et ensuite le tableau
     contenant les valeurs d'oscillation.
     Il est à noter que les valeurs de l'oscillateur sont scalaires et ordonnées :
     La première valeur de l'oscillateur s'additionnera à la plus haute valeur de la

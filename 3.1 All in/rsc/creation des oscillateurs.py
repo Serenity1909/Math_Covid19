@@ -13,7 +13,7 @@ arr = []
 # avant à (0, 3, 1), j'ai du passer à (0, 2, 1) avec les 19 communes, sinon il y a trop de résultats
 for a in range(0, 2, 1):
     for b in range(0, 2, 1):
-        for c in range(0, 3, 1):
+        for c in range(0, 2, 1):
             for d in range(0, 2, 1):
                 for e in range(0, 2, 1):
                     for f in range(0, 2, 1):
