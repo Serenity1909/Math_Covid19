@@ -216,43 +216,359 @@ def oscillation_processing(debut_p, fin_p, oscillateurs, path):
                                                         for n in range(0, len(oscillateurs), 1):
                                                             r14 = oscillation(mtx_prob[13], oscillateurs[e], divide=10)
                                                             for o in range(0, len(oscillateurs), 1):
-                                                                r15 = oscillation(mtx_prob[14], oscillateurs[e],
-                                                                                 divide=10)
+                                                                r15 = oscillation(mtx_prob[14], oscillateurs[e],divide=10)
                                                                 for p in range(0, len(oscillateurs), 1):
-                                                                    r16 = oscillation(mtx_prob[15], oscillateurs[e],
-                                                                                     divide=10)
+                                                                    r16 = oscillation(mtx_prob[15], oscillateurs[e],divide=10)
                                                                     for q in range(0, len(oscillateurs), 1):
-                                                                        r17 = oscillation(mtx_prob[16], oscillateurs[e],
-                                                                                         divide=10)
+                                                                        r17 = oscillation(mtx_prob[16], oscillateurs[e],divide=10)
                                                                         for r in range(0, len(oscillateurs), 1):
-                                                                            r18 = oscillation(mtx_prob[17],
-                                                                                             oscillateurs[e], divide=10)
+                                                                            r18 = oscillation(mtx_prob[17],oscillateurs[e], divide=10)
                                                                             for s in range(0, len(oscillateurs), 1):
-                                                                                r19 = oscillation(mtx_prob[18],
-                                                                                                 oscillateurs[e],
-                                                                                                 divide=10)
+                                                                                r19 = oscillation(mtx_prob[18],oscillateurs[e],divide=10)
                                                                                 # mtxs_prob.append([r1, r2, r3, r4, r5])
                                                                                 # file.write(str(r1) + ';' + str(r2) + ';' + str(r3) + ';' + str(r4) + ';' + str(r5) + '\n')
-                                                                                file.write(str(r1[0]) + ";" + str(r1[1]) + ";" + str(r1[2]) + ";" + str(r1[3]) + ";" + str(r1[4]) + ";")
-                                                                                file.write(str(r2[0]) + ";" + str(r2[1]) + ";" + str(r2[2]) + ";" + str(r2[3]) + ";" + str(r2[4]) + ";")
-                                                                                file.write(str(r3[0]) + ";" + str(r3[1]) + ";" + str(r3[2]) + ";" + str(r3[3]) + ";" + str(r3[4]) + ";")
-                                                                                file.write(str(r4[0]) + ";" + str(r4[1]) + ";" + str(r4[2]) + ";" + str(r4[3]) + ";" + str(r4[4]) + ";")
-                                                                                file.write(str(r5[0]) + ";" + str(r5[1]) + ";" + str(r5[2]) + ";" + str(r5[3]) + ";" + str(r5[4]) + ";")
-                                                                                file.write(str(r6[0]) + ";" + str(r6[1]) + ";" + str(r4[2]) + ";" + str(r4[3]) + ";" + str(r4[4]) + ";")
-                                                                                file.write(str(r7[0]) + ";" + str(r7[1]) + ";" + str(r4[2]) + ";" + str(r4[3]) + ";" + str(r4[4]) + ";")
-                                                                                file.write(str(r8[0]) + ";" + str(r8[1]) + ";" + str(r4[2]) + ";" + str(r4[3]) + ";" + str(r4[4]) + ";")
-                                                                                file.write(str(r9[0]) + ";" + str(r9[1]) + ";" + str(r4[2]) + ";" + str(r4[3]) + ";" + str(r4[4]) + ";")
-                                                                                file.write(str(r10[0]) + ";" + str(r4[1]) + ";" + str(r4[2]) + ";" + str(r4[3]) + ";" + str(r4[4]) + ";")
-                                                                                file.write(str(r11[0]) + ";" + str(r4[1]) + ";" + str(r4[2]) + ";" + str(r4[3]) + ";" + str(r4[4]) + ";")
-                                                                                file.write(str(r12[0]) + ";" + str(r4[1]) + ";" + str(r4[2]) + ";" + str(r4[3]) + ";" + str(r4[4]) + ";")
-                                                                                file.write(str(r13[0]) + ";" + str(r4[1]) + ";" + str(r4[2]) + ";" + str(r4[3]) + ";" + str(r4[4]) + ";")
-                                                                                file.write(str(r14[0]) + ";" + str(r4[1]) + ";" + str(r4[2]) + ";" + str(r4[3]) + ";" + str(r4[4]) + ";")
-                                                                                file.write(str(r15[0]) + ";" + str(r4[1]) + ";" + str(r4[2]) + ";" + str(r4[3]) + ";" + str(r4[4]) + ";")
-                                                                                file.write(str(r16[0]) + ";" + str(r4[1]) + ";" + str(r4[2]) + ";" + str(r4[3]) + ";" + str(r4[4]) + ";")
-                                                                                file.write(str(r17[0]) + ";" + str(r4[1]) + ";" + str(r4[2]) + ";" + str(r4[3]) + ";" + str(r4[4]) + ";")
-                                                                                file.write(str(r18[0]) + ";" + str(r4[1]) + ";" + str(r4[2]) + ";" + str(r4[3]) + ";" + str(r4[4]) + ";")
-                                                                                file.write(str(r19[0]) + ";" + str(r4[1]) + ";" + str(r4[2]) + ";" + str(r4[3]) + ";" + str(r4[4]) + "\n")
-
+                                                                                file.write(str(r1[0]) + ";" + str(
+                                                                                    r1[1]) + ";" + str(
+                                                                                    r1[2]) + ";" + str(
+                                                                                    r1[3]) + ";" + str(
+                                                                                    r1[4]) + ";" + str(
+                                                                                    r1[5]) + ";" + str(
+                                                                                    r1[6]) + ";" + str(
+                                                                                    r1[7]) + ";" + str(
+                                                                                    r1[8]) + ";" + str(
+                                                                                    r1[9]) + ";" + str(
+                                                                                    r1[10]) + ";" + str(
+                                                                                    r1[11]) + ";" + str(
+                                                                                    r1[12]) + ";" + str(
+                                                                                    r1[13]) + ";" + str(
+                                                                                    r1[14]) + ";" + str(
+                                                                                    r1[15]) + ";" + str(
+                                                                                    r1[16]) + ";" + str(
+                                                                                    r1[17]) + ";" + str(r1[18]) + ";")
+                                                                                file.write(str(r2[0]) + ";" + str(
+                                                                                    r2[1]) + ";" + str(
+                                                                                    r2[2]) + ";" + str(
+                                                                                    r2[3]) + ";" + str(
+                                                                                    r2[4]) + ";" + str(
+                                                                                    r2[5]) + ";" + str(
+                                                                                    r2[6]) + ";" + str(
+                                                                                    r2[7]) + ";" + str(
+                                                                                    r2[8]) + ";" + str(
+                                                                                    r2[9]) + ";" + str(
+                                                                                    r2[10]) + ";" + str(
+                                                                                    r2[11]) + ";" + str(
+                                                                                    r2[12]) + ";" + str(
+                                                                                    r2[13]) + ";" + str(
+                                                                                    r2[14]) + ";" + str(
+                                                                                    r2[15]) + ";" + str(
+                                                                                    r2[16]) + ";" + str(
+                                                                                    r2[17]) + ";" + str(r2[18]) + ";")
+                                                                                file.write(str(r3[0]) + ";" + str(
+                                                                                    r3[1]) + ";" + str(
+                                                                                    r3[2]) + ";" + str(
+                                                                                    r3[3]) + ";" + str(
+                                                                                    r3[4]) + ";" + str(
+                                                                                    r3[5]) + ";" + str(
+                                                                                    r3[6]) + ";" + str(
+                                                                                    r3[7]) + ";" + str(
+                                                                                    r3[8]) + ";" + str(
+                                                                                    r3[9]) + ";" + str(
+                                                                                    r3[10]) + ";" + str(
+                                                                                    r3[11]) + ";" + str(
+                                                                                    r3[12]) + ";" + str(
+                                                                                    r3[13]) + ";" + str(
+                                                                                    r3[14]) + ";" + str(
+                                                                                    r3[15]) + ";" + str(
+                                                                                    r3[16]) + ";" + str(
+                                                                                    r3[17]) + ";" + str(r3[18]) + ";")
+                                                                                file.write(str(r4[0]) + ";" + str(
+                                                                                    r4[1]) + ";" + str(
+                                                                                    r4[2]) + ";" + str(
+                                                                                    r4[3]) + ";" + str(
+                                                                                    r4[4]) + ";" + str(
+                                                                                    r4[5]) + ";" + str(
+                                                                                    r4[6]) + ";" + str(
+                                                                                    r4[7]) + ";" + str(
+                                                                                    r4[8]) + ";" + str(
+                                                                                    r4[9]) + ";" + str(
+                                                                                    r4[10]) + ";" + str(
+                                                                                    r4[11]) + ";" + str(
+                                                                                    r4[12]) + ";" + str(
+                                                                                    r4[13]) + ";" + str(
+                                                                                    r4[14]) + ";" + str(
+                                                                                    r4[15]) + ";" + str(
+                                                                                    r4[16]) + ";" + str(
+                                                                                    r4[17]) + ";" + str(r4[18]) + ";")
+                                                                                file.write(str(r5[0]) + ";" + str(
+                                                                                    r5[1]) + ";" + str(
+                                                                                    r5[2]) + ";" + str(
+                                                                                    r5[3]) + ";" + str(
+                                                                                    r5[4]) + ";" + str(
+                                                                                    r5[5]) + ";" + str(
+                                                                                    r5[6]) + ";" + str(
+                                                                                    r5[7]) + ";" + str(
+                                                                                    r5[8]) + ";" + str(
+                                                                                    r5[9]) + ";" + str(
+                                                                                    r5[10]) + ";" + str(
+                                                                                    r5[11]) + ";" + str(
+                                                                                    r5[12]) + ";" + str(
+                                                                                    r5[13]) + ";" + str(
+                                                                                    r5[14]) + ";" + str(
+                                                                                    r5[15]) + ";" + str(
+                                                                                    r5[16]) + ";" + str(
+                                                                                    r5[17]) + ";" + str(r5[18]) + ";")
+                                                                                file.write(str(r6[0]) + ";" + str(
+                                                                                    r6[1]) + ";" + str(
+                                                                                    r6[2]) + ";" + str(
+                                                                                    r6[3]) + ";" + str(
+                                                                                    r6[4]) + ";" + str(
+                                                                                    r6[5]) + ";" + str(
+                                                                                    r6[6]) + ";" + str(
+                                                                                    r6[7]) + ";" + str(
+                                                                                    r6[8]) + ";" + str(
+                                                                                    r6[9]) + ";" + str(
+                                                                                    r6[10]) + ";" + str(
+                                                                                    r6[11]) + ";" + str(
+                                                                                    r6[12]) + ";" + str(
+                                                                                    r6[13]) + ";" + str(
+                                                                                    r6[14]) + ";" + str(
+                                                                                    r6[15]) + ";" + str(
+                                                                                    r6[16]) + ";" + str(
+                                                                                    r6[17]) + ";" + str(r6[18]) + ";")
+                                                                                file.write(str(r7[0]) + ";" + str(
+                                                                                    r7[1]) + ";" + str(
+                                                                                    r7[2]) + ";" + str(
+                                                                                    r7[3]) + ";" + str(
+                                                                                    r7[4]) + ";" + str(
+                                                                                    r7[5]) + ";" + str(
+                                                                                    r7[6]) + ";" + str(
+                                                                                    r7[7]) + ";" + str(
+                                                                                    r7[8]) + ";" + str(
+                                                                                    r7[9]) + ";" + str(
+                                                                                    r7[10]) + ";" + str(
+                                                                                    r7[11]) + ";" + str(
+                                                                                    r7[12]) + ";" + str(
+                                                                                    r7[13]) + ";" + str(
+                                                                                    r7[14]) + ";" + str(
+                                                                                    r7[15]) + ";" + str(
+                                                                                    r7[16]) + ";" + str(
+                                                                                    r7[17]) + ";" + str(r7[18]) + ";")
+                                                                                file.write(str(r8[0]) + ";" + str(
+                                                                                    r8[1]) + ";" + str(
+                                                                                    r8[2]) + ";" + str(
+                                                                                    r8[3]) + ";" + str(
+                                                                                    r8[4]) + ";" + str(
+                                                                                    r8[5]) + ";" + str(
+                                                                                    r8[6]) + ";" + str(
+                                                                                    r8[7]) + ";" + str(
+                                                                                    r8[8]) + ";" + str(
+                                                                                    r8[9]) + ";" + str(
+                                                                                    r8[10]) + ";" + str(
+                                                                                    r8[11]) + ";" + str(
+                                                                                    r8[12]) + ";" + str(
+                                                                                    r8[13]) + ";" + str(
+                                                                                    r8[14]) + ";" + str(
+                                                                                    r8[15]) + ";" + str(
+                                                                                    r8[16]) + ";" + str(
+                                                                                    r8[17]) + ";" + str(r8[18]) + ";")
+                                                                                file.write(str(r9[0]) + ";" + str(
+                                                                                    r9[1]) + ";" + str(
+                                                                                    r9[2]) + ";" + str(
+                                                                                    r9[3]) + ";" + str(
+                                                                                    r9[4]) + ";" + str(
+                                                                                    r9[5]) + ";" + str(
+                                                                                    r9[6]) + ";" + str(
+                                                                                    r9[7]) + ";" + str(
+                                                                                    r9[8]) + ";" + str(
+                                                                                    r9[9]) + ";" + str(
+                                                                                    r9[10]) + ";" + str(
+                                                                                    r9[11]) + ";" + str(
+                                                                                    r9[12]) + ";" + str(
+                                                                                    r9[13]) + ";" + str(
+                                                                                    r9[14]) + ";" + str(
+                                                                                    r9[15]) + ";" + str(
+                                                                                    r9[16]) + ";" + str(
+                                                                                    r9[17]) + ";" + str(r9[18]) + ";")
+                                                                                file.write(str(r10[0]) + ";" + str(
+                                                                                    r10[1]) + ";" + str(
+                                                                                    r10[2]) + ";" + str(
+                                                                                    r10[3]) + ";" + str(
+                                                                                    r10[4]) + ";" + str(
+                                                                                    r10[5]) + ";" + str(
+                                                                                    r10[6]) + ";" + str(
+                                                                                    r10[7]) + ";" + str(
+                                                                                    r10[8]) + ";" + str(
+                                                                                    r10[9]) + ";" + str(
+                                                                                    r10[10]) + ";" + str(
+                                                                                    r10[11]) + ";" + str(
+                                                                                    r10[12]) + ";" + str(
+                                                                                    r10[13]) + ";" + str(
+                                                                                    r10[14]) + ";" + str(
+                                                                                    r10[15]) + ";" + str(
+                                                                                    r10[16]) + ";" + str(
+                                                                                    r10[17]) + ";" + str(r10[18]) + ";")
+                                                                                file.write(str(r11[0]) + ";" + str(
+                                                                                    r11[1]) + ";" + str(
+                                                                                    r11[2]) + ";" + str(
+                                                                                    r11[3]) + ";" + str(
+                                                                                    r11[4]) + ";" + str(
+                                                                                    r11[5]) + ";" + str(
+                                                                                    r11[6]) + ";" + str(
+                                                                                    r11[7]) + ";" + str(
+                                                                                    r11[8]) + ";" + str(
+                                                                                    r11[9]) + ";" + str(
+                                                                                    r11[10]) + ";" + str(
+                                                                                    r11[11]) + ";" + str(
+                                                                                    r11[12]) + ";" + str(
+                                                                                    r11[13]) + ";" + str(
+                                                                                    r11[14]) + ";" + str(
+                                                                                    r11[15]) + ";" + str(
+                                                                                    r11[16]) + ";" + str(
+                                                                                    r11[17]) + ";" + str(r11[18]) + ";")
+                                                                                file.write(str(r12[0]) + ";" + str(
+                                                                                    r12[1]) + ";" + str(
+                                                                                    r12[2]) + ";" + str(
+                                                                                    r12[3]) + ";" + str(
+                                                                                    r12[4]) + ";" + str(
+                                                                                    r12[5]) + ";" + str(
+                                                                                    r12[6]) + ";" + str(
+                                                                                    r12[7]) + ";" + str(
+                                                                                    r12[8]) + ";" + str(
+                                                                                    r12[9]) + ";" + str(
+                                                                                    r12[10]) + ";" + str(
+                                                                                    r12[11]) + ";" + str(
+                                                                                    r12[12]) + ";" + str(
+                                                                                    r12[13]) + ";" + str(
+                                                                                    r12[14]) + ";" + str(
+                                                                                    r12[15]) + ";" + str(
+                                                                                    r12[16]) + ";" + str(
+                                                                                    r12[17]) + ";" + str(r12[18]) + ";")
+                                                                                file.write(str(r13[0]) + ";" + str(
+                                                                                    r13[1]) + ";" + str(
+                                                                                    r13[2]) + ";" + str(
+                                                                                    r13[3]) + ";" + str(
+                                                                                    r13[4]) + ";" + str(
+                                                                                    r13[5]) + ";" + str(
+                                                                                    r13[6]) + ";" + str(
+                                                                                    r13[7]) + ";" + str(
+                                                                                    r13[8]) + ";" + str(
+                                                                                    r13[9]) + ";" + str(
+                                                                                    r13[10]) + ";" + str(
+                                                                                    r13[11]) + ";" + str(
+                                                                                    r13[12]) + ";" + str(
+                                                                                    r13[13]) + ";" + str(
+                                                                                    r13[14]) + ";" + str(
+                                                                                    r13[15]) + ";" + str(
+                                                                                    r13[16]) + ";" + str(
+                                                                                    r13[17]) + ";" + str(r13[18]) + ";")
+                                                                                file.write(str(r14[0]) + ";" + str(
+                                                                                    r14[1]) + ";" + str(
+                                                                                    r14[2]) + ";" + str(
+                                                                                    r14[3]) + ";" + str(
+                                                                                    r14[4]) + ";" + str(
+                                                                                    r14[5]) + ";" + str(
+                                                                                    r14[6]) + ";" + str(
+                                                                                    r14[7]) + ";" + str(
+                                                                                    r14[8]) + ";" + str(
+                                                                                    r14[9]) + ";" + str(
+                                                                                    r14[10]) + ";" + str(
+                                                                                    r14[11]) + ";" + str(
+                                                                                    r14[12]) + ";" + str(
+                                                                                    r14[13]) + ";" + str(
+                                                                                    r14[14]) + ";" + str(
+                                                                                    r14[15]) + ";" + str(
+                                                                                    r14[16]) + ";" + str(
+                                                                                    r14[17]) + ";" + str(r14[18]) + ";")
+                                                                                file.write(str(r15[0]) + ";" + str(
+                                                                                    r15[1]) + ";" + str(
+                                                                                    r15[2]) + ";" + str(
+                                                                                    r15[3]) + ";" + str(
+                                                                                    r15[4]) + ";" + str(
+                                                                                    r15[5]) + ";" + str(
+                                                                                    r15[6]) + ";" + str(
+                                                                                    r15[7]) + ";" + str(
+                                                                                    r15[8]) + ";" + str(
+                                                                                    r15[9]) + ";" + str(
+                                                                                    r15[10]) + ";" + str(
+                                                                                    r15[11]) + ";" + str(
+                                                                                    r15[12]) + ";" + str(
+                                                                                    r15[13]) + ";" + str(
+                                                                                    r15[14]) + ";" + str(
+                                                                                    r15[15]) + ";" + str(
+                                                                                    r15[16]) + ";" + str(
+                                                                                    r15[17]) + ";" + str(r15[18]) + ";")
+                                                                                file.write(str(r16[0]) + ";" + str(
+                                                                                    r16[1]) + ";" + str(
+                                                                                    r16[2]) + ";" + str(
+                                                                                    r16[3]) + ";" + str(
+                                                                                    r16[4]) + ";" + str(
+                                                                                    r16[5]) + ";" + str(
+                                                                                    r16[6]) + ";" + str(
+                                                                                    r16[7]) + ";" + str(
+                                                                                    r16[8]) + ";" + str(
+                                                                                    r16[9]) + ";" + str(
+                                                                                    r16[10]) + ";" + str(
+                                                                                    r16[11]) + ";" + str(
+                                                                                    r16[12]) + ";" + str(
+                                                                                    r16[13]) + ";" + str(
+                                                                                    r16[14]) + ";" + str(
+                                                                                    r16[15]) + ";" + str(
+                                                                                    r16[16]) + ";" + str(
+                                                                                    r16[17]) + ";" + str(r16[18]) + ";")
+                                                                                file.write(str(r17[0]) + ";" + str(
+                                                                                    r17[1]) + ";" + str(
+                                                                                    r17[2]) + ";" + str(
+                                                                                    r17[3]) + ";" + str(
+                                                                                    r17[4]) + ";" + str(
+                                                                                    r17[5]) + ";" + str(
+                                                                                    r17[6]) + ";" + str(
+                                                                                    r17[7]) + ";" + str(
+                                                                                    r17[8]) + ";" + str(
+                                                                                    r17[9]) + ";" + str(
+                                                                                    r17[10]) + ";" + str(
+                                                                                    r17[11]) + ";" + str(
+                                                                                    r17[12]) + ";" + str(
+                                                                                    r17[13]) + ";" + str(
+                                                                                    r17[14]) + ";" + str(
+                                                                                    r17[15]) + ";" + str(
+                                                                                    r17[16]) + ";" + str(
+                                                                                    r17[17]) + ";" + str(r17[18]) + ";")
+                                                                                file.write(str(r18[0]) + ";" + str(
+                                                                                    r18[1]) + ";" + str(
+                                                                                    r18[2]) + ";" + str(
+                                                                                    r18[3]) + ";" + str(
+                                                                                    r18[4]) + ";" + str(
+                                                                                    r18[5]) + ";" + str(
+                                                                                    r18[6]) + ";" + str(
+                                                                                    r18[7]) + ";" + str(
+                                                                                    r18[8]) + ";" + str(
+                                                                                    r18[9]) + ";" + str(
+                                                                                    r18[10]) + ";" + str(
+                                                                                    r18[11]) + ";" + str(
+                                                                                    r18[12]) + ";" + str(
+                                                                                    r18[13]) + ";" + str(
+                                                                                    r18[14]) + ";" + str(
+                                                                                    r18[15]) + ";" + str(
+                                                                                    r18[16]) + ";" + str(
+                                                                                    r18[17]) + ";" + str(r18[18]) + ";")
+                                                                                file.write(str(r19[0]) + ";" + str(
+                                                                                    r19[1]) + ";" + str(
+                                                                                    r19[2]) + ";" + str(
+                                                                                    r19[3]) + ";" + str(
+                                                                                    r19[4]) + ";" + str(
+                                                                                    r19[5]) + ";" + str(
+                                                                                    r19[6]) + ";" + str(
+                                                                                    r19[7]) + ";" + str(
+                                                                                    r19[8]) + ";" + str(
+                                                                                    r19[9]) + ";" + str(
+                                                                                    r19[10]) + ";" + str(
+                                                                                    r19[11]) + ";" + str(
+                                                                                    r19[12]) + ";" + str(
+                                                                                    r19[13]) + ";" + str(
+                                                                                    r19[14]) + ";" + str(
+                                                                                    r19[15]) + ";" + str(
+                                                                                    r19[16]) + ";" + str(
+                                                                                    r19[17]) + ";" + str(r19[18]) + ";")
 
                                                                                 count += 1
                                                                                 if count > 10000: #Bride
