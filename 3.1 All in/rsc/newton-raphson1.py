@@ -9,6 +9,7 @@ ne gère pas les situations où la méthode de Newton-Raphson ne converge pas
 
 
 # Fonction qui définit les équations
+
 def F(x):
     return np.array(
         [10 * x[0] + 8 * x[1] + 1 * x[2] + 14 * x[3] + 8 * x[5] + 1 * x[6] + 1 * x[7] + 2 * x[8] + 1 * x[9] - 14])
@@ -25,7 +26,7 @@ def newton_raphson(x0, tol=1e-6):
     while delta > tol:
         f = F(x)
         j = J(x)
-        delta_x = np.linalg.solve(j.T @ j, -j.T @ f)
+        delta_x = np.linalg.pinv(j) @ -f
         x_new = x + delta_x
         delta = np.max(np.abs(delta_x))
         x = x_new
