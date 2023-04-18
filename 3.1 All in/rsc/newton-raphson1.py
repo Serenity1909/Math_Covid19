@@ -9,31 +9,23 @@ ne gère pas les situations où la méthode de Newton-Raphson ne converge pas
 
 
 # Fonction qui définit les équations
-def F(x):  # Seule la première équation est définie, les autres sont égales à zéro
-    return np.array([10 * x[0] + 8 * x[1] + 1 * x[2] + 14 * x[3] + 0 * x[4] + 8 * x[5] + 1 * x[6] + 1 * x[7] + 2 * x[
-        8] + 1 * x[9] - 14, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+def F(x):
+    return np.array(
+        [10 * x[0] + 8 * x[1] + 1 * x[2] + 14 * x[3] + 8 * x[5] + 1 * x[6] + 1 * x[7] + 2 * x[8] + 1 * x[9] - 14])
 
 
-def J(x):  # Fonction qui définit la matrice jacobienne
-    return np.array([[10, 8, 1, 14, 0, 8, 1, 1, 2, 1],
-                     [0, 8, 0, 0, 0, 0, 0, 0, 0, 0],
-                     [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-                     [0, 0, 0, 14, 0, 0, 0, 0, 0, 0],
-                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                     [0, 0, 0, 0, 0, 8, 0, 0, 0, 0],
-                     [0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-                     [0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-                     [0, 0, 0, 0, 0, 0, 0, 0, 2, 0],
-                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 1]])
+def J(x):
+    return np.array([[10, 8, 1, 14, 0, 8, 1, 1, 2, 1]])
 
 
-def newton_raphson(x0, tol=1e-6):  # Méthode de Newton-Raphson pour résoudre le système d'équations
+# Méthode de Newton-Raphson pour résoudre le système d'équations
+def newton_raphson(x0, tol=1e-6):
     delta = np.inf
     x = x0
     while delta > tol:
         f = F(x)
         j = J(x)
-        delta_x = np.linalg.solve(j, -f)
+        delta_x = np.linalg.solve(j.T @ j, -j.T @ f)
         x_new = x + delta_x
         delta = np.max(np.abs(delta_x))
         x = x_new
