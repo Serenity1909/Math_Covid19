@@ -1,3 +1,0 @@
-Afin de rendre le code principal Python plus lisible j'ai créé des annexes en .py
-qui contiennent les méthodes à utiliser dans le script principal. 
-Ca permet une bien meilleure lecture... (et ça facilite la correction xD)

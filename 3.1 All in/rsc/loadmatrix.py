@@ -1,9 +1,9 @@
+
 """
 Juste un script python qui recharge le fichier Json créé auparavant,
 mais il le charge et corrige déja les valeurs interne :
 par exemple si la valeur n'existe pas ou que c'est par exemple '<5',
 ce script retourne directement un 0 comme valeur.
-
 On retourne évidemment un array contenant toutes les matrices journalière :)
 """
 from colorama import *
@@ -42,34 +42,90 @@ def loadmatrice(path):
     index = [datetime.datetime.strptime(ts, "%Y-%m-%d") for ts in index]
     index.sort()
     index = [datetime.datetime.strftime(ts, '%Y-%m-%d') for ts in index]
-    print(Fore.GREEN + "Clés du fichier " + Fore.CYAN + "COVID_5BXL.json" + Fore.GREEN +" extraites et triées.")
+    print(Fore.GREEN + "Clés du fichier " + Fore.CYAN + "COVID_19BXL.json" + Fore.GREEN +" extraites et triées.")
 
     #On crée les matrices jour par jour:
     # Les try/except servent à retourner un 0 quand la clé (commune) n'existe pas dans le fichier
     rtn = []
     for ind in index:
         try:
+            ander = convert(data[ind]['Anderlecht'])
+        except:
+            ander = 0
+        try:
+            aud = convert(data[ind]['Auderghem'])
+        except:
+            aud = 0
+        try:
+            ber = convert(data[ind]['Berchem-Sinte-Agathe'])
+        except:
+            ber = 0
+        try:
             bxl = convert(data[ind]['Bruxelles'])
         except:
             bxl = 0
         try:
-            sch = convert(data[ind]['Schaerbeek'])
+            ett = convert(data[ind]['Etterbeek'])
         except:
-            sch = 0
+            ett = 0
         try:
             eve = convert(data[ind]['Evere'])
         except:
             eve = 0
         try:
+            fore = convert(data[ind]['Forest'])
+        except:
+            fore = 0
+        try:
+            gan = convert(data[ind]['Ganshoren'])
+        except:
+            gan = 0
+        try:
+            ixe = convert(data[ind]['Ixelles'])
+        except:
+            ixe = 0
+        try:
+            jet = convert(data[ind]['Jette'])
+        except:
+            jet = 0
+        try:
+            koe = convert(data[ind]['Koekelberg'])
+        except:
+            koe = 0
+        try:
+            mol = convert(data[ind]['Molenbeek-Saint-Jean'])
+        except:
+            mol = 0
+        try:
+            sai = convert(data[ind]['Saint-Gilles'])
+        except:
+            sai = 0
+        try:
+            saijo = convert(data[ind]['Saint-Josse-ten-Noode'])
+        except:
+            saijo = 0
+        try:
+            sch = convert(data[ind]['Schaerbeek'])
+        except:
+            sch = 0
+        try:
+            ucc = convert(data[ind]['Uccle'])
+        except:
+            ucc = 0
+        try:
+            wat = convert(data[ind]['Watermael-Boitsfort'])
+        except:
+            wat = 0
+        try:
             wsl = convert(data[ind]['Woluwe-Saint-Lambert'])
         except:
             wsl = 0
         try:
-            ett = convert(data[ind]['Etterbeek'])
+            wsp = convert(data[ind]['Woluwe-Saint-Pierre'])
         except:
-            ett = 0
+            wsp = 0
 
-        rtn.append([bxl, sch, eve, wsl, ett])
+        rtn.append([ander, aud, ber, bxl, ett, eve, fore, gan, ixe, jet, koe, mol, sai, saijo, sch, ucc, wat, wsl, wsp])
 
     print(Fore.RESET + "Matrices journalières créées.")
     print()
