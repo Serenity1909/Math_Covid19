@@ -107,6 +107,7 @@ def forward_backward(obs, A, pi, n_states, n_labels):
 
     return alpha, beta, gamma
 
+
 def estimate_parameters(observations, n_states, n_labels, n_iters=100, tol=1e-6):
     """
     Estimate the transition matrix A and initial state probabilities pi using the EM algorithm.
@@ -138,43 +139,40 @@ def estimate_parameters(observations, n_states, n_labels, n_iters=100, tol=1e-6)
             gammas.append(gamma)
             new_likelihood += np.sum(np.log(np.dot(alpha[-1], pi)))
 
-        # M-step
-        A_num = np.zeros((n_states, n_states))
-        A_den = np.zeros((n_states, 1))
-        pi_num = np.zeros((n_states,))
-        pi_den = 0
-        for i in range(n_dates):
-            date = dates[i]
-            obs = observations[date]
-            gamma = gammas[i]
+            # M-step
+            A_num = np.zeros((n_states, n_states))
+            A_den = np.zeros((n_states,))  # Fix: Changed shape to (n_states,)
+            pi_num = np.zeros((n_states,))
+            pi_den = 0
+            for i in range(n_dates):
+                date = dates[i]
+                obs = observations[date]
+                gamma = gammas[i]
 
-            # Update A_num and A_den
-            T = len(obs)
-            for t in range(T - 1):
-                A_num += np.outer(gamma[t], gamma[t + 1])
-                A_den += gamma[t]
+                # Update A_num and A_den
+                T = len(obs)
+                for t in range(T - 1):
+                    A_num += np.outer(gamma[t], gamma[t + 1])
+                    A_den += gamma[t]  # Fix: Accumulate along the correct axis
 
-            # Update pi_num and pi_den
-            pi_num += gamma[0]
-            pi_den += 1
+                # Update pi_num and pi_den
+                pi_num += gamma[0]
+                pi_den += 1
 
-        # Add a small value to avoid division by zero or NaNs
-        A_den += 1e-10
-        pi_den += 1e-10
+            # Normalize A and pi
+            A_den = np.sum(A_den)  # Fix: Sum over all states
+            A = A_num / A_den[:, None]  # Fix: Normalize along the first dimension
+            pi = pi_num / pi_den
 
-        # Normalize A and pi
-        A = A_num / A_den[:, None]
-        pi = pi_num / pi_den
-
-        likelihoods.append(new_likelihood)
-        if i > 0 and likelihoods[-1] - likelihoods[-2] < tol:
-            break
+            likelihoods.append(new_likelihood)
+            if i > 0 and likelihoods[-1] - likelihoods[-2] < tol:
+                break
 
     return A, pi, likelihoods
 
 
 if __name__ == '__main__':
-    file_path = 'COVID_5BXL.json'
+    file_path = 'COVID_19BXL.json'
     n_states = 2
     n_labels = 19
     dates, labels, observations = parse_observations(file_path)
