@@ -1,5 +1,5 @@
 """
-1. Conversion données de Sciensano
+Conversion_Sciensano
 
 Bien regarder quel fichier prendre sur le site de sciensano
 https://epistat.wiv-isp.be/covid/
@@ -17,28 +17,26 @@ import datetime
 import collections
 
 
-def makehash():  # Pour les dict a plusieurs niveaux
-    return collections.defaultdict(makehash)
-
-
-###########################
-# Début ###################
-
-print("=====================================================")
-print(Fore.YELLOW + "1. Conversion données de Sciensano")
-print("=====================================================")
-
-
 def jsonfilecreation():
+    def makehash():  # Pour les dict a plusieurs niveaux
+        return collections.defaultdict(makehash)
+
+    ###########################
+    # Début ###################
+
+    print("=====================================================")
+    print(Fore.YELLOW + "Conversion_Sciensano")
+    print("=====================================================")
+
     # DateTime pour enregistrer le temps que le fichier va mettre
     tempsDepart = datetime.datetime.now()
 
     # Ouverture du fichier
     try:
-        file = open("COVID19BE_CASES_MUNI.json", "r", encoding='utf8').read()
+        file = open("Conversion_Sciensano/COVID19BE_CASES_MUNI.json", "r", encoding='utf8').read()
     except:
         print(Fore.RED + "Erreur :")
-        print("Impossible de trouver le fichier : " + Fore.CYAN + "COVID19BE_CASES_MUNI.json")
+        print("Impossible de trouver le fichier : " + Fore.CYAN + "Conversion_Sciensano/COVID19BE_CASES_MUNI.json")
         input()
         quit()
 
@@ -83,25 +81,40 @@ def jsonfilecreation():
     for item in data:
 
         if item.get("TX_DESCR_FR") == "Bruxelles":
-            dicoMatrix[item.get('DATE')]['Bruxelles'] = item.get('CASES')
+            if item.get('CASES') == "<5":
+                dicoMatrix[item.get('DATE')]['Bruxelles'] = "0"
+            else:
+                dicoMatrix[item.get('DATE')]['Bruxelles'] = item.get('CASES')
 
         if item.get("TX_DESCR_FR") == "Schaerbeek":
-            dicoMatrix[item.get('DATE')]['Schaerbeek'] = item.get('CASES')
+            if item.get('CASES') == "<5":
+                dicoMatrix[item.get('DATE')]['Schaerbeek'] = "0"
+            else:
+                dicoMatrix[item.get('DATE')]['Schaerbeek'] = item.get('CASES')
 
         if item.get("TX_DESCR_FR") == "Evere":
-            dicoMatrix[item.get('DATE')]['Evere'] = item.get('CASES')
+            if item.get('CASES') == "<5":
+                dicoMatrix[item.get('DATE')]['Evere'] = "0"
+            else:
+                dicoMatrix[item.get('DATE')]['Evere'] = item.get('CASES')
 
         if item.get("TX_DESCR_FR") == "Woluwe-Saint-Lambert":
-            dicoMatrix[item.get('DATE')]['Woluwe-Saint-Lambert'] = item.get('CASES')
+            if item.get('CASES') == "<5":
+                dicoMatrix[item.get('DATE')]['Woluwe-Saint-Lambert'] = "0"
+            else:
+                dicoMatrix[item.get('DATE')]['Woluwe-Saint-Lambert'] = item.get('CASES')
 
         if item.get("TX_DESCR_FR") == "Etterbeek":
-            dicoMatrix[item.get('DATE')]['Etterbeek'] = item.get('CASES')
+            if item.get('CASES') == "<5":
+                dicoMatrix[item.get('DATE')]['Etterbeek'] = 0
+            else:
+                dicoMatrix[item.get('DATE')]['Etterbeek'] = item.get('CASES')
 
     print()
     print("Enregistrement du fichier : " + Fore.CYAN + "'COVID_5BXL.JSON'")
 
     try:
-        file = open('../2. Espérance de maximisation/COVID_5BXL.json', 'w', encoding='utf8')
+        file = open('Espérance_de_maximisation/COVID_5BXL.json', 'w', encoding='utf8')
         file.write(json.dumps(dicoMatrix))
         file.close()
     except:
