@@ -106,7 +106,7 @@ def jsonfilecreation():
 
         if item.get("TX_DESCR_FR") == "Etterbeek":
             if item.get('CASES') == "<5":
-                dicoMatrix[item.get('DATE')]['Etterbeek'] = 0
+                dicoMatrix[item.get('DATE')]['Etterbeek'] = "0"
             else:
                 dicoMatrix[item.get('DATE')]['Etterbeek'] = item.get('CASES')
 
