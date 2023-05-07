@@ -1,8 +1,0 @@
-2.2 Matrices Zoom
-D'après une idée de Jordan, que j'ai un peu bidouillé pour "l'informatiser".
-L'idée de base c'est de partir de la matrice médiane [0.2,0.2,0.2,0.2,0.2]
-et d'osciller autour de ces valeurs afin de produire d'autres matrices. 
-Une fois le nuage de matrices récupéré, il suffit de faire une regression
-linéaire sur cet ensemble, pour ensuite réosciller autour mais de manière plus
-finie... Et ainsi on effectue le zoom petit à petit...
-Ca évite de devoir faire toutes les matrices probabiliste possible.
