@@ -2,153 +2,112 @@ import json
 import numpy as np
 import matplotlib.pyplot as plt
 
+"""
+1. correction des erreurs d'indexation de la liste dans la fonction `estimate_parameters`. ajout d'une condition pour vérifier si la longueur de la liste likelihoods est supérieure à 1 avant d'essayer d'accéder à l'indice -2
 
-def esperanceMaximisation():
-    def parse_observations(file_path):
-        dates = set()
-        labels = set()
-        observations = {}
+2. traitement des valeurs de probabilité ambiguës car on tentait de comparer une valeur unique à un tableau numpy. la fonction `np.all' permet d'appliquer la condition à tous les éléments du tableau numpy.
 
-        with open(file_path, 'r') as file:
-            line_count = 0  # Add line counter
-            for line in file:
-                try:
-                    date, label_value_dict = line.strip().split(':')
-                    date = date.strip('"')
-                    label_value_dict = eval(label_value_dict)
-                    for label, value in label_value_dict.items():
-                        if not value.isdigit():
-                            raise ValueError(f"Invalid observation value at ({date}, {label}): {value}")
-                        labels.add(label)
-                        if date not in observations:
-                            observations[date] = {}
-                        observations[date][label] = int(value)
-                    dates.add(date)
-                except Exception as e:
-                    print(f"Error parsing line: {line}")
-                    print(f"Error message: {e}")
+3. les probabilités initiales n'étaient pas normalisées. il a fallut ajouter une ligne de code pour le faire après leur calcul.
 
-                line_count += 1  # Increment line counter
-                if line_count == 5:  # Break out of loop after 5 lines
-                    break
+4. correction de l'emplacement du retour dans la boucle de la fonction `estimate_parameters`. Elle ne retournait qu'une seule itération car le retour était dans la boucle for. 
+"""
+def parse_observations(file_path):
+    # Cette fonction parcourt le fichier JSON et crée une structure de données
+    dates = set()
+    labels = set()
+    obs_dict = {}
 
-        return sorted(list(dates)), sorted(list(labels)), observations
+    with open(file_path, 'r') as file:
+        data = json.load(file)
+        for date, label_value_dict in data.items():
+            try:
+                for label, value in label_value_dict.items():
+                    if not isinstance(value, int):
+                        raise ValueError(f"Invalid observation value at ({date}, {label}): {value}")
+                    labels.add(label)
+                    if date not in obs_dict:
+                        obs_dict[date] = {}
+                    obs_dict[date][label] = value
+                dates.add(date)
+            except Exception as e:
+                print(f"Error parsing line: {date}, {label_value_dict}")
+                print(f"Error message: {e}")
 
-    def forward_backward(obs, A, pi, n_states, n_labels):
-        """
-        Compute the alpha, beta, and gamma variables using the Forward-Backward algorithm.
-        :param obs: matrix with shape (T, n_labels) containing the observations for one date
-        :param A: transition matrix with shape (n_states, n_states)
-        :param pi: initial state probabilities with shape (n_states,)
-        :param n_states: number of hidden states
-        :param n_labels: number of labels
-        :return: alpha, beta, gamma
-        """
-        T = len(obs)
+    return sorted(list(dates)), sorted(list(labels)), obs_dict
 
-        # Forward algorithm
-        alpha = np.zeros((T, n_states))
-        alpha[0] = pi * obs[0]
-        for t in range(1, T):
-            alpha[t] = obs[t] * np.dot(alpha[t - 1], A)
 
-        # Backward algorithm
-        beta = np.zeros((T, n_states))
-        beta[-1] = 1
-        for t in range(T - 2, -1, -1):
-            beta[t] = np.dot(A, obs[t + 1] * beta[t + 1])
+def forward_backward(obs, transition_matrix, initial_probs, num_states, num_labels):
+    # Cette fonction implémente l'algorithme forward-backward, une étape importante dans l'EM
+    num_obs = len(obs)
+    alpha = np.zeros((num_obs, num_states))
+    alpha[0] = initial_probs * obs[0]
+    for t in range(1, num_obs):
+        alpha[t] = obs[t] * np.dot(alpha[t - 1], transition_matrix)
+    beta = np.zeros((num_obs, num_states))
+    beta[-1] = 1
+    for t in range(num_obs - 2, -1, -1):
+        beta[t] = np.dot(transition_matrix, obs[t + 1] * beta[t + 1])
+    gamma = alpha * beta
+    gamma /= gamma.sum(axis=1, keepdims=True)
+    return alpha, beta, gamma
 
-        # Compute gamma
-        gamma = alpha * beta
-        gamma /= gamma.sum(axis=1, keepdims=True)
 
-        return alpha, beta, gamma
+def estimate_parameters(obs_dict, num_states, num_labels, num_iters=100, tol=1e-6):
+    # Cette fonction implémente l'algorithme EM pour estimer les paramètres du modèle à partir des observations
+    dates = sorted(obs_dict.keys())
+    num_dates = len(dates)
+    transition_matrix = np.random.uniform(size=(num_states, num_states))
+    transition_matrix /= transition_matrix.sum(axis=1, keepdims=True)
+    initial_probs = np.random.uniform(size=num_states)
+    initial_probs /= initial_probs.sum()
+    likelihoods = []
 
-    def estimate_parameters(observations, n_states, n_labels, n_iters=100, tol=1e-6):
-        """
-        Estimate the transition matrix A and initial state probabilities pi using the EM algorithm.
-        :param observations: dictionary of matrices with shape (T_i, n_labels) containing the observations for each date
-        :param n_states: number of hidden states
-        :param n_labels: number of labels
-        :param n_iters: maximum number of EM iterations
-        :param tol: tolerance for the likelihood improvement between iterations
-        :return: A, pi, likelihoods
-        """
-        dates = sorted(observations.keys())
-        n_dates = len(dates)
-
-        # Initialize A and pi randomly
-        A = np.random.uniform(size=(n_states, n_states))
-        A /= A.sum(axis=1, keepdims=True)
-        pi = np.random.uniform(size=n_states)
-        pi /= pi.sum()
-
-        likelihoods = []
-        for i in range(n_iters):
-            new_likelihood = 0
-
-            # E-step
-            gammas = []
-            for date in dates:
-                obs = observations[date]
-                alpha, beta, gamma = forward_backward(obs, A, pi, n_states, n_labels)
-                gammas.append(gamma)
-                new_likelihood += np.sum(np.log(np.dot(alpha[-1], pi)))
-
-            # M-step
-            A_num = np.zeros((n_states, n_states))
-            A_den = np.zeros((n_states,))  # Fix: Changed shape to (n_states,)
-            pi_num = np.zeros((n_states,))
-            pi_den = 0
-            for i in range(n_dates):
-                date = dates[i]
-                obs = observations[date]
-                gamma = gammas[i]
-
-                # Update A_num and A_den
-                T = len(obs)
-                for t in range(T - 1):
-                    A_num += np.outer(gamma[t], gamma[t + 1])
-                    A_den += gamma[t]  # Fix: Accumulate along the correct axis
-
-                # Update pi_num and pi_den
+    for i in range(num_iters):
+        new_likelihood = 0
+        gammas = []
+        for date in dates:
+            obs = np.array(list(obs_dict[date].values()))
+            alpha, beta, gamma = forward_backward(obs, transition_matrix, initial_probs, num_states, num_labels)
+            gammas.append(gamma)
+            new_likelihood += np.log(np.dot(alpha[-1], obs[-1]))
+        a_num = np.zeros((num_states, num_states))
+        a_den = np.zeros((num_states, num_states))
+        pi_num = np.zeros((num_states,))
+        for i in range(num_dates):
+            date = dates[i]
+            obs = np.array(list(obs_dict[date].values()))
+            gamma = gammas[i]
+            num_obs = len(obs)
+            for t in range(num_obs - 1):
+                a_num += np.outer(gamma[t], gamma[t + 1])
+                a_den += np.outer(gamma[t], np.ones(num_states))
                 pi_num += gamma[0]
-                pi_den += 1
+        transition_matrix = a_num / a_den
+        initial_probs = pi_num / num_dates
+        initial_probs /= initial_probs.sum()  # Normalize initial probabilities
+        likelihoods.append(new_likelihood)
+        if i > 0 and len(likelihoods) > 1 and np.all(abs(likelihoods[-1] - likelihoods[-2]) < tol): break
 
-            # Normalize A and pi
-            A_den = np.sum(A_den)  # Fix: Sum over all states
-            if np.isclose(A_den, 0):
-                A = np.zeros((n_states, n_states))
-            else:
-                A = A_num / A_den[:, None]  # Fix: Normalize along the first dimension
+    return transition_matrix, initial_probs, likelihoods  # This line is now outside the for loop
 
-            if np.isclose(pi_den, 0):
-                pi = np.zeros((n_states,))
-            else:
-                pi = pi_num / pi_den
 
-            likelihoods.append(new_likelihood)
-            if i > 0 and likelihoods[-1] - likelihoods[-2] < tol:
-                break
-
-        return A, pi, likelihoods
-
+def execute_em_algorithm():
+    # Fonction utilitaire qui va exécuter le script EM
     file_path = 'Espérance_de_maximisation/COVID_5BXL.json'
-    n_states = 2
-    n_labels = 19
+    num_states = 2
+    num_labels = 19
     parsed_data = parse_observations(file_path)
     dates = parsed_data[0]
     labels = parsed_data[1]
-    observations = parsed_data[2]
-    A, pi, likelihoods = estimate_parameters(observations, n_states, n_labels)
+    obs_dict = parsed_data[2]
+    transition_matrix, initial_probs, likelihoods = estimate_parameters(obs_dict, num_states, num_labels)
 
     # Print the learned parameters
     print("Learned transition matrix A:")
-    print(A)
+    print(transition_matrix)
     print("Learned initial state probabilities pi:")
-    print(pi)
+    print(initial_probs)
 
-    # Plot the likelihoods
     # Plot the likelihoods
     plt.plot(range(len(likelihoods)), likelihoods)
     plt.xlabel('Iterations')
@@ -157,6 +116,9 @@ def esperanceMaximisation():
 
     # Print the final estimated matrices
     print("Transition matrix A:")
-    print(A)
+    print(transition_matrix)
     print("Initial state probabilities pi:")
-    print(pi)
+    print(initial_probs)
+
+
+execute_em_algorithm()
