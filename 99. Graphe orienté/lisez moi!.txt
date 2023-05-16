@@ -1,7 +1,0 @@
-De manière locale il n'est pas possible de charger dynamiquement un
-fichier JSON en Javascript. 
-Par contre il est possible de modifier le fichier RESULT_MATRICES.json
-afin de le faire paraitre comme un script local JavaScript.
-
-Lancez le script python "Modification JSON vers JS.py" pour le convertir
-automatiquement.
