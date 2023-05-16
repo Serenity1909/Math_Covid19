@@ -3,8 +3,8 @@ from Espérance_de_maximisation.EM import execute_em_algorithm
 
 
 def main():
-    jsonConversion()
-    execute_em_algorithm()
+    jsonConversion("dataBrutSciensano.json")
+    execute_em_algorithm('dataEM.json')
 
 
 if __name__ == "__main__":
