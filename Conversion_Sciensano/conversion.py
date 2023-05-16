@@ -2,7 +2,7 @@
 Conversion_Sciensano
 
 Bien regarder quel fichier prendre sur le site de sciensano
-https://epistat.wiv-isp.be/covid/
+https://epistat.wiv-isp.be/covid/  'Confirmed case by date and municipality' format: json
 
 2022.
 """
@@ -16,7 +16,7 @@ from colorama import *
 init(autoreset=True)
 
 
-def jsonConversion():
+def jsonConversion(filename):
     MUNICIPALITIES = ["Bruxelles", "Schaerbeek", "Evere", "Woluwe-Saint-Lambert", "Etterbeek"]
 
     print("=====================================================")
@@ -27,15 +27,15 @@ def jsonConversion():
 
     try:
         # Ouverture et lecture du fichier de données
-        with open("Conversion_Sciensano/COVID19BE_CASES_MUNI.json", "r", encoding='utf8') as f:
+        with open(filename, "r", encoding='utf8') as f:
             data = json.loads(f.read())
     except FileNotFoundError:
         # Gestion de l'erreur si le fichier n'est pas trouvé
         print(Fore.RED + "Erreur :")
-        print("Impossible de trouver le fichier : " + Fore.CYAN + "Conversion_Sciensano/COVID19BE_CASES_MUNI.json")
+        print("Impossible de trouver le fichier : " + Fore.CYAN + filename)
         return
 
-    print("Fichier : " + Fore.CYAN + "COVID19BE_CASES_MUNI.json" + Fore.RESET + " trouvé.")
+    print("Fichier : " + Fore.CYAN + filename + Fore.RESET + " trouvé.")
     print("Fichier converti")
 
     print("Il y a " + Fore.YELLOW + str(len(data)) + Fore.RESET + " entrées.")
@@ -62,7 +62,7 @@ def jsonConversion():
 
     try:
         # Enregistrement des données converties dans un nouveau fichier JSON
-        with open('Espérance_de_maximisation/COVID_5BXL.json', 'w', encoding='utf8') as f:
+        with open('../dataEM.json', 'w', encoding='utf8') as f:
             f.write(json.dumps(dicoMatrix))
     except Exception as e:
         # Gestion de l'erreur si l'enregistrement du fichier échoue
@@ -77,6 +77,3 @@ def jsonConversion():
     tempsFin = datetime.datetime.now()
     tempsTotal = tempsFin - tempsDepart
     print("Effectué en " + Fore.YELLOW + str(tempsTotal) + Fore.RESET + " millisecondes.")
-
-
-jsonConversion()
